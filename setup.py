@@ -6,11 +6,12 @@ setup(
     version="1.3.0r",
     packages=find_packages(),
     install_requires=[
-        "six",
         "pyyaml",
-        "imageio==2.8.0",
+        "imageio>2.17.0",
         "imageio-ffmpeg",
         "numpy>1.19.0",
+        "pandas",
+        "scipy",
         "scikit-image",
         "matplotlib",
         "attr",
@@ -20,6 +21,8 @@ setup(
         'tensorboard',
         "mat73",
         "psutil",
+        "tqdm",
+        "easydict"
     ],
     # scripts=[],
     entry_points={

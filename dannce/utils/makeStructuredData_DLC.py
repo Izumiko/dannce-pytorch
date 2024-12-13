@@ -14,7 +14,7 @@ import numpy as np
 import scipy.io as sio
 import sys
 import os
-import dannce.engine.processing as processing
+from dannce.engine.data import processing
 import ast
 from itertools import combinations
 if __name__ == "__main__":

@@ -14,7 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 import sys
-import dannce.engine.ops as ops
+from dannce.engine.data import ops
 from dannce.utils.rat7m.loadStructs import load_mocap, load_cameras
 
 _CHUNKS = 3500

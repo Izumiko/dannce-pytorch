@@ -3,7 +3,6 @@ import numpy as np
 import imageio
 import os
 import PIL
-from six.moves import cPickle
 from typing import Dict, Text
 import pickle
 from tqdm import tqdm
@@ -122,7 +121,7 @@ def generate_readers(
             out[mp4files_scrub[i]] = os.path.join(viddir, mp4files[i])
         else:
             print(
-                "NOTE: Ignoring {} files numbered above {}".format(extensions, maxopt)
+                "NOTE: Ignoring {} files numbered above {}".format(extension, maxopt)
             )
             out[mp4files_scrub[i]] = imageio.get_reader(
                 os.path.join(viddir, mp4files[i]),
@@ -419,7 +418,7 @@ def trim_COM_pickle(fpath, start_sample, end_sample, opath=None):
     spath is the output path for saving the trimmed COM dictionary, if desired
     """
     with open(fpath, "rb") as f:
-        save_data = cPickle.load(f)
+        save_data = pickle.load(f)
     sd = {}
 
     for key in save_data:
@@ -427,7 +426,7 @@ def trim_COM_pickle(fpath, start_sample, end_sample, opath=None):
             sd[key] = save_data[key]
 
     with open(opath, "wb") as f:
-        cPickle.dump(sd, f)
+        pickle.dump(sd, f)
     return sd
 
 """
@@ -508,7 +507,7 @@ def make_data_splits(samples, params, results_dir, num_experiments, temporal_chu
         else: 
             # Load validation samples from elsewhere
             with open(os.path.join(params["load_valid"], "val_samples.pickle"), "rb") as f:
-                partition["valid_sampleIDs"] = cPickle.load(f)
+                partition["valid_sampleIDs"] = pickle.load(f)
             partition["train_sampleIDs"] = [f for f in samples if f not in partition["valid_sampleIDs"]]
         
         chunk_size = len(temporal_chunks[0][0])
@@ -517,10 +516,10 @@ def make_data_splits(samples, params, results_dir, num_experiments, temporal_chu
         # breakpoint()
         # Save train/val inds
         with open(os.path.join(results_dir, "val_samples.pickle"), "wb") as f:
-            cPickle.dump(partition["valid_sampleIDs"], f)
+            pickle.dump(partition["valid_sampleIDs"], f)
 
         with open(os.path.join(results_dir, "train_samples.pickle"), "wb") as f:
-            cPickle.dump(partition["train_sampleIDs"], f)
+            pickle.dump(partition["train_sampleIDs"], f)
         return partition
 
 
@@ -611,17 +610,17 @@ def make_data_splits(samples, params, results_dir, num_experiments, temporal_chu
 
         # Save train/val inds
         with open(os.path.join(results_dir, "val_samples.pickle"), "wb") as f:
-            cPickle.dump(partition["valid_sampleIDs"], f)
+            pickle.dump(partition["valid_sampleIDs"], f)
 
         with open(os.path.join(results_dir, "train_samples.pickle"), "wb") as f:
-            cPickle.dump(partition["train_sampleIDs"], f)
+            pickle.dump(partition["train_sampleIDs"], f)
     else:
         # Load validation samples from elsewhere
         with open(
             os.path.join(params["load_valid"], "val_samples.pickle"),
             "rb",
         ) as f:
-            partition["valid_sampleIDs"] = cPickle.load(f)
+            partition["valid_sampleIDs"] = pickle.load(f)
         partition["train_sampleIDs"] = [
             f for f in samples if f not in partition["valid_sampleIDs"]
         ]
@@ -1163,7 +1162,7 @@ def save_COM_checkpoint(
     """
     # Save undistorted 2D COMs and their 3D triangulations
     f = open(os.path.join(results_dir, file_name + ".pickle"), "wb")
-    cPickle.dump(save_data, f)
+    pickle.dump(save_data, f)
     f.close()
 
     # We need to remove the eID in front of all the keys in datadict
@@ -1235,7 +1234,7 @@ def savedata_expval(
     """Save the expected values."""
     if data is None:
         f = open(fname, "rb")
-        data = cPickle.load(f)
+        data = pickle.load(f)
         f.close()
 
     d_coords = np.zeros((len(list(data.keys())), 3, num_markers))
@@ -1289,7 +1288,7 @@ def savedata_tomat(
     """
     if data is None:
         f = open(fname, "rb")
-        data = cPickle.load(f)
+        data = pickle.load(f)
         f.close()
 
     d_coords = np.zeros((list(data.keys())[-1] + 1, 3, num_markers))

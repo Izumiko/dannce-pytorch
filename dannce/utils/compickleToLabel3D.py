@@ -10,7 +10,6 @@ Reads in COM3D pickle file, takes median across camera pairs, and saves the resu
 import numpy as np
 import sys
 import scipy.io as sio
-from six.moves import cPickle
 import os
 
 if __name__ == "__main__":

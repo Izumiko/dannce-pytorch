@@ -11,8 +11,7 @@ import numpy as np
 import scipy.io as sio
 import sys
 import os
-import dannce.engine.processing as processing
-import dannce.engine.io as io
+from dannce.engine.data import processing, io
 import ast
 from dannce import _param_defaults_shared, _param_defaults_dannce, _param_defaults_com
 
