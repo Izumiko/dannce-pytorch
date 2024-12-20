@@ -1,0 +1,89 @@
+[build-system]
+requires = ["setuptools>=64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dannce"
+version = "1.4.0"
+description = 'DANNCE (3-Dimensional Aligned Neural Network for Computational Ethology) for 3D animal pose estimation.'
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Timothy Dunn", email = "dunn.tw@gmail.com"},
+  {name = "Diego Etiony Aldarondo", email = "diegoaldarondo@g.harvard.edu"},
+  {name = "Tianqing Li", email = "tianqing.li@duke.edu"},
+  {name = "Kyle Severson", email = "ksevers2@jhmi.edu"},
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Environment :: GPU",
+  "Environment :: GPU :: NVIDIA CUDA :: 11",
+  "Environment :: GPU :: NVIDIA CUDA :: 12",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Image Processing",
+  "Topic :: Scientific/Engineering :: Image Recognition",
+  "Topic :: Scientific/Engineering :: Mathematics",
+  "Topic :: Scientific/Engineering :: Visualization",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+    "pyyaml",
+    "imageio>2.17.0",
+    "imageio-ffmpeg",
+    "numpy>1.19.0",
+    "pandas",
+    "scipy",
+    "scikit-image",
+    "matplotlib",
+    "attr",
+    "attrs",
+    "multiprocess",
+    "opencv-python",
+    "tensorboard",
+    "mat73",
+    "psutil",
+    "tqdm",
+    "easydict"
+]
+
+[project.scripts]
+dannce-predict-sbatch = "dannce.cli:sbatch_dannce_predict_cli"
+dannce-train-sbatch = "dannce.cli:sbatch_dannce_train_cli"
+com-predict-sbatch = "dannce.cli:sbatch_com_predict_cli"
+com-train-sbatch = "dannce.cli:sbatch_com_train_cli"
+dannce-train = "dannce.cli:dannce_train_cli"
+custom-train = "dannce.cli:custom_model_train_cli"
+custom-predict = "dannce.cli:custom_model_predict_cli"
+dannce-train-grid = "cluster.grid:dannce_train_grid"
+dannce-predict = "dannce.cli:dannce_predict_cli"
+com-train = "dannce.cli:com_train_cli"
+com-predict = "dannce.cli:com_predict_cli"
+dannce-predict-multi-gpu = "cluster.multi_gpu:dannce_predict_multi_gpu"
+com-predict-multi-gpu = "cluster.multi_gpu:com_predict_multi_gpu"
+dannce-predict-single-batch = "cluster.multi_gpu:dannce_predict_single_batch"
+dannce-train-single-batch = "cluster.grid:dannce_train_single_batch"
+com-predict-single-batch = "cluster.multi_gpu:com_predict_single_batch"
+dannce-merge = "cluster.multi_gpu:dannce_merge"
+com-merge = "cluster.multi_gpu:com_merge"
+dannce-inference-sbatch = "cluster.multi_gpu:submit_inference"
+dannce-inference = "cluster.multi_gpu:inference"
+dannce-multi-instance-inference = "cluster.multi_gpu:multi_instance_inference"
+
+[project.urls]
+Homepage = "https://github.com/tqxli/dannce-pytorch"
+Documentation = "https://github.com/spoonsso/dannce/wiki"
+Issues = "https://github.com/tqxli/dannce-pytorch/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dannce*"]
+namespaces = false
